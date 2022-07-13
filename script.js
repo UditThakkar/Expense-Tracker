@@ -11,6 +11,9 @@ const inputDescEl = document.querySelector("#inputDesc");
 // read value from inputAmt
 const inputEle = document.querySelector("#inputAmt");
 
+// get the ref to table
+const expenseTableEl = document.querySelector("#expenseTable");
+
 headingEl.textContent = totalExpense;
 
 // all expense at one place
@@ -40,8 +43,21 @@ function addExpense() {
     //add to total
     totalExpense += expense;
 
+    // const someText = `Expense: ${totalExpense}`;
     // set the header element to total expense
     headingEl.innerText = totalExpense;
+
+    const data1 = allExpenses[0];
+    const data2 = allExpenses[1];
+
+    const data1Text = `|Expense: ${data1.amount} :: Desc: ${data1.desc}|`
+    const data2Text = `|Expense: ${data2.amount} :: Desc: ${data2.desc}|`
+
+    const tableText =`
+        <div>${data1Text}</div>
+        <div>${data2Text}</div>
+    `
+    expenseTableEl.innerHTML = tableText;
 }
 
 
