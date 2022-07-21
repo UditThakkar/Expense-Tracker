@@ -58,9 +58,7 @@ function addExpense() {
     //     <div>${data2Text}</div>
     // `
 
-    const allExpenseHTML = allExpenses.map(expense =>{
-        return `<div>${expense.amount} :: ${expense.desc}</div>`
-    });
+    const allExpenseHTML = allExpenses.map(expense =>createListItem(expenseItem));
     
 
     const joinedAllExpenseHTML = allExpenseHTML.join("");
@@ -79,3 +77,20 @@ const ele = document.querySelector("#btnAdd");
 
 //listen to events 
 ele.addEventListener("click", addExpense, false);
+
+function createListItem({desc,amount}) {
+    return `
+        <li class="list-group-item d-flex justify-content-between">
+            <div class="d-flex flex-column">
+            ${desc}
+            <small class="text-muted">March 11, 2019</small>
+            </div>
+            <div>
+            <span class="px-5"> ${amount} </span>
+            <button type="button" class="btn btn-outline-danger btn-sm">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            </div>
+        </li>
+        `;
+}
