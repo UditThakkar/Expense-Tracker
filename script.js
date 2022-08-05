@@ -41,7 +41,7 @@ function addExpense() {
 
     allExpenses.push(expenseItem);
     console.clear();
-    console.table(allExpenses);
+    // console.table(allExpenses);
 
     //add to total
     totalExpense += expense;
@@ -66,8 +66,6 @@ function addExpense() {
 
     const joinedAllExpenseHTML = allExpenseHTML.join("");
 
-    console.log(joinedAllExpenseHTML);
-
     expenseTableEl.innerHTML = joinedAllExpenseHTML;
 }
 
@@ -81,12 +79,28 @@ const ele = document.querySelector("#btnAdd");
 //listen to events 
 ele.addEventListener("click", addExpense, false);
 
+// Controller functions
+// get date
+
 function getDateString(moment){
     return moment.toLocaleDateString('en-US', {
         year : 'numeric',
         month : 'long',
         day: 'numeric'
     });
+}
+
+// delete items
+
+function deleteItem(dateValue) {
+    console.log('delete item was called', dateValue);
+
+    for(let i=0;i<allExpenses.length;i++){
+        if(allExpenses[i].moment.valueOf()===dateValue){
+            console.log('Item found', allExpenses[i]);
+        }
+        
+    }
 }
 
 // view layer
@@ -99,7 +113,9 @@ function createListItem({desc,amount,moment}) {
             </div>
             <div>
             <span class="px-5"> ${amount} </span>
-            <button type="button" class="btn btn-outline-danger btn-sm">
+            <button 
+            type="button" 
+            class="btn btn-outline-danger btn-sm" onclick="deleteItem(${moment.valueOf()})">
                 <i class="fas fa-trash-alt"></i>
             </button>
             </div>
